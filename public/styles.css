@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 10px;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+    background: blue;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.movies-list {
+    margin-top: 20px;
+}
+
+.movie-item {
+    padding: 10px;
+    background: #333;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+a {
+    color: cyan;
+    text-decoration: none;
+    display: block;
+    margin-top: 20px;
+}
