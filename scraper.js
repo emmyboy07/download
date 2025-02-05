@@ -6,9 +6,8 @@ let browserInstance = null;
 
 async function getBrowser() {
   if (!browserInstance) {
-    console.log('Launching new browser instance');
     browserInstance = await puppeteer.launch({
-      headless: 'new',
+      headless: "new",
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -31,14 +30,11 @@ const scrape1337x = async (query) => {
 
   try {
     await page.setDefaultNavigationTimeout(7200000); // 2 hours
-    console.log(`Navigating to search: ${query}`);
-    
     await page.goto(`https://1337x.to/search/${encodeURIComponent(query)}/1/`, {
       waitUntil: 'networkidle2',
       timeout: 30000
     });
 
-    console.log('Waiting for results...');
     await page.waitForSelector('table.table-list tbody tr', { timeout: 15000 });
 
     const results = await page.$$eval('table.table-list tbody tr', (rows) => {
@@ -51,8 +47,6 @@ const scrape1337x = async (query) => {
       })).filter(t => t.detailUrl);
     });
 
-    console.log(`Found ${results.length} results, processing...`);
-    
     for (const result of results) {
       const detailPage = await browser.newPage();
       try {
@@ -60,7 +54,6 @@ const scrape1337x = async (query) => {
         await detailPage.goto(result.detailUrl, { waitUntil: 'networkidle2' });
         await detailPage.waitForSelector('a[href^="magnet:"]', { timeout: 10000 });
         result.magnet = await detailPage.$eval('a[href^="magnet:"]', a => a.href);
-        console.log(`Got magnet link for: ${result.title}`);
       } finally {
         await detailPage.close();
       }
