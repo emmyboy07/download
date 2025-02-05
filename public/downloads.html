@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloaded Movies</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloaded Movies</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Downloaded Movies</h1>
-        
-        <div id="downloadedMovies" class="movies-list"></div>
-
-        <div id="playerContainer" class="hidden">
-            <video id="videoPlayer" controls>
-                <source id="videoSource" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
-        </div>
-
-        <a href="index.html" class="back-home">Back to Home</a>
+  <div class="container">
+    <h1>Downloaded Movies</h1>
+    
+    <div class="nav">
+      <button onclick="window.location.href='index.html'">Back to Search</button>
     </div>
 
-    <script src="downloads.js"></script>
+    <div id="downloadsList" class="results-section"></div>
+
+    <div id="playerContainer" class="hidden">
+      <video id="videoPlayer" controls>
+        <source id="videoSource" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+
+    <div id="errorMessage" class="error"></div>
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
 </html>

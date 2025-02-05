@@ -94,6 +94,26 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
+
+// Endpoint to list downloaded files
+app.get('/api/downloads', (req, res) => {
+  try {
+    const files = fs.readdirSync(DOWNLOAD_DIR);
+    const downloads = files.map(file => ({
+      name: file,
+      size: `${(fs.statSync(path.join(DOWNLOAD_DIR, file)).size / (1024 * 1024)).toFixed(2)} MB`,
+      fileName: file
+    }));
+    res.json(downloads);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Serve downloaded files
+app.use('/downloads', express.static(DOWNLOAD_DIR));
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
